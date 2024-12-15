@@ -1,10 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { IoMdMenu, IoMdClose } from "react-icons/io"; // Icons for the burger menu
+import { IoMdMenu, IoMdClose } from "react-icons/io";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const navItems = [
   { href: "/", label: "Home" },
@@ -18,10 +19,30 @@ const navItems = [
 export function FloatingNav() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const NavLinks = () => (
+    <>
+      {navItems.map((item) => (
+        <Link
+          key={item.href}
+          href={item.href}
+          className={`px-4 py-2 rounded-full text-sm transition-colors ${
+            pathname === item.href
+              ? "bg-gradient-to-r from-teal-400 to-blue-400 text-white"
+              : "text-gray-300 hover:text-white"
+          }`}
+          onClick={() => setIsOpen(false)}
+        >
+          {item.label}
+        </Link>
+      ))}
+    </>
+  );
 
   return (
     <motion.div
@@ -29,34 +50,32 @@ export function FloatingNav() {
       animate={{ y: 0, opacity: 1 }}
       className="fixed top-4 z-50 w-full flex justify-end pr-4"
     >
-      {/* Burger Menu Icon (visible on mobile) */}
-      <div className="lg:hidden">
-        <button onClick={toggleMenu} className="text-white">
-          {isOpen ? <IoMdClose size={30} /> : <IoMdMenu size={30} />}
-        </button>
-      </div>
+      {/* Burger Menu Icon */}
+      <button onClick={toggleMenu} className="text-white lg:hidden">
+        {isOpen ? <IoMdClose size={30} /> : <IoMdMenu size={30} />}
+      </button>
 
-      {/* Navigation Menu */}
-      <div
-        className={`${
-          isOpen ? "block" : "hidden"
-        } lg:flex lg:items-center lg:gap-2 py-2 rounded-full bg-black/50 backdrop-blur-md border border-white/10 absolute top-14 right-4 lg:static lg:block`}
-      >
-        {navItems.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={`px-4 py-2 rounded-full text-sm transition-colors ${
-              pathname === item.href
-                ? "bg-gradient-to-r from-teal-400 to-blue-400 text-white"
-                : "text-gray-300 hover:text-white"
-            }`}
-            onClick={() => setIsOpen(false)} // Close the menu on link click
+      {/* Desktop Navigation */}
+      {!isMobile && (
+        <div className="hidden lg:flex lg:items-center lg:gap-2 py-2 rounded-full bg-black/50 backdrop-blur-md border border-white/10">
+          <NavLinks />
+        </div>
+      )}
+
+      {/* Mobile Side Popup */}
+      <AnimatePresence>
+        {isMobile && isOpen && (
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="fixed top-0 right-0 h-full w-64 bg-black/90 backdrop-blur-md border-l border-white/10 flex flex-col items-start p-4 pt-16"
           >
-            {item.label}
-          </Link>
-        ))}
-      </div>
+            <NavLinks />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }
