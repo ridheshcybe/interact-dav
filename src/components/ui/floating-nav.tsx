@@ -14,6 +14,7 @@ const navItems = [
   { href: "/members", label: "Members" },
   { href: "/join", label: "Join" },
   { href: "/contact", label: "Contact" },
+  { href: "https://stats.uptimerobot.com/Z6V1J3233m", label: "Status" },
 ];
 
 export function FloatingNav() {
