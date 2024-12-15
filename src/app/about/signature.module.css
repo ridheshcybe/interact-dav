@@ -1,0 +1,11 @@
+.signatureSvg {
+  width: 100%;
+  height: auto;
+}
+
+.path {
+  stroke: black;
+  stroke-width: 2;
+  stroke-linecap: round;
+  fill: none;
+}
