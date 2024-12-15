@@ -16,7 +16,7 @@ export default function Footer() {
           >
             Created by Ridhesh w.
           </Link>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-gray-400 line-clamp-1">
             © {currentYear} Interact Club DAV & Ridhesh w. All rights reserved.
           </p>
         </div>
