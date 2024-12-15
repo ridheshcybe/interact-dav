@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import styles from "./Signature.module.css";
+import styles from "./signature.module.css";
 
 const Signature = () => {
   const [pathLength, setPathLength] = useState(0);
