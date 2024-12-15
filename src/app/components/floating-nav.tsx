@@ -1,30 +1,17 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { IoMdMenu, IoMdClose } from "react-icons/io";
+import { navItems } from "@/data";
+import { usePathname } from "next/navigation";
 import { useIsMobile } from "@/hooks/useIsMobile";
-
-const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/events", label: "Events" },
-  { href: "/members", label: "Members" },
-  { href: "/join", label: "Join" },
-  { href: "/contact", label: "Contact" },
-  { href: "https://stats.uptimerobot.com/Z6V1J3233m", label: "Status" },
-];
+import { IoMdMenu, IoMdClose } from "react-icons/io";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function FloatingNav() {
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
   const isMobile = useIsMobile();
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+  const [isOpen, setIsOpen] = useState(false);
 
   const NavLinks = () => (
     <>
@@ -52,7 +39,10 @@ export function FloatingNav() {
       className="fixed top-4 z-50 w-full flex justify-end pr-4"
     >
       {/* Burger Menu Icon */}
-      <button onClick={toggleMenu} className="text-white lg:hidden">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="text-white lg:hidden"
+      >
         {isOpen ? <IoMdClose size={30} /> : <IoMdMenu size={30} />}
       </button>
 

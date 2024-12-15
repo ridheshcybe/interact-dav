@@ -1,8 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { GradientText } from "@/components/ui/gradient-text";
 import { useState } from "react";
+import { motion } from "framer-motion";
+import { GradientText } from "@/app/components/gradient-text";
 
 export default function Join() {
   const [formData, setFormData] = useState({
@@ -32,8 +32,7 @@ export default function Join() {
       }
 
       const result = await response.json();
-      console.log("Form submitted:", result);
-      setSubmissionSuccess(true); // Show success feedback
+      setSubmissionSuccess(true);
       setFormData({ name: "", email: "", grade: 10, reason: "" }); // Clear form
     } catch (err) {
       console.error("Error submitting form:", err);

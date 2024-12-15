@@ -6,6 +6,16 @@ interface Events {
 
 const upcomingEvents: Events[] = [];
 
+export const navItems = [
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About" },
+    { href: "/events", label: "Events" },
+    { href: "/members", label: "Members" },
+    { href: "/join", label: "Join" },
+    { href: "/contact", label: "Contact" },
+    { href: "https://stats.uptimerobot.com/Z6V1J3233m", label: "Status" },
+];
+
 export const cards = [
     {
         title: "Community Service",
@@ -28,3 +38,30 @@ export const UpcomingEvents = upcomingEvents.length == 0 ? [
         description: "We will update further on",
     }
 ] : upcomingEvents;
+
+export const members = [
+    {
+        id: 1,
+        name: "Jane Doe",
+        role: "President",
+        image: "/placeholder.svg?height=100&width=100",
+    },
+    {
+        id: 2,
+        name: "John Smith",
+        role: "Vice President",
+        image: "/placeholder.svg?height=100&width=100",
+    },
+    {
+        id: 3,
+        name: "Emily Brown",
+        role: "Secretary",
+        image: "/placeholder.svg?height=100&width=100",
+    },
+    {
+        id: 4,
+        name: "Michael Johnson",
+        role: "Treasurer",
+        image: "/placeholder.svg?height=100&width=100",
+    },
+];

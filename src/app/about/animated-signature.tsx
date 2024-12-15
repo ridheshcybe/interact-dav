@@ -1,7 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import styles from "./signature.module.css";
 
 const Signature = () => {
   const [pathLength, setPathLength] = useState(0);
@@ -18,7 +17,7 @@ const Signature = () => {
     <svg
       viewBox="0 0 600 125"
       xmlns="http://www.w3.org/2000/svg"
-      className={styles.signatureSvg}
+      className="signatureSvg"
     >
       <motion.path
         ref={pathRef}

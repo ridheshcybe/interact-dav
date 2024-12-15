@@ -1,4 +1,5 @@
 "use client";
+import { members } from "@/data";
 import { motion } from "framer-motion";
 
 const fadeIn = {
@@ -6,33 +7,6 @@ const fadeIn = {
   animate: { opacity: 1, y: 0 },
   transition: { duration: 0.6 },
 };
-
-const members = [
-  {
-    id: 1,
-    name: "Jane Doe",
-    role: "President",
-    image: "/placeholder.svg?height=100&width=100",
-  },
-  {
-    id: 2,
-    name: "John Smith",
-    role: "Vice President",
-    image: "/placeholder.svg?height=100&width=100",
-  },
-  {
-    id: 3,
-    name: "Emily Brown",
-    role: "Secretary",
-    image: "/placeholder.svg?height=100&width=100",
-  },
-  {
-    id: 4,
-    name: "Michael Johnson",
-    role: "Treasurer",
-    image: "/placeholder.svg?height=100&width=100",
-  },
-];
 
 export default function Members() {
   return (

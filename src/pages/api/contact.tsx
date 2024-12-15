@@ -1,7 +1,5 @@
-// src/pages/api/contact.ts
-
+import { supabaseClient } from "@/lib/supabase";
 import { NextApiRequest, NextApiResponse } from "next";
-import { supabaseClient } from "@/lib/supabase"; // Import Supabase client
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,6 +7,9 @@ export default async function handler(
 ) {
   if (req.method === "POST") {
     const { name, email, message } = req.body;
+    if (!name) res.status(400).send("no name");
+    if (!email) res.status(400).send("no email");
+    if (!message) res.status(400).send("no message");
 
     try {
       // Insert data into the Supabase table (replace 'contacts' with your table name)

@@ -44,8 +44,6 @@ body {
   background-color: black;
 }
 
-/* Preloader.module.css */
-
 .preloader > p {
   background: linear-gradient(
     90deg,
@@ -74,4 +72,24 @@ body {
   100% {
     transform: rotate(360deg);
   }
+}
+.signatureSvg {
+  width: 100%;
+  height: auto;
+}
+
+.path {
+  stroke: black;
+  stroke-width: 2;
+  stroke-linecap: round;
+  fill: none;
+}
+
+.mask {
+  mask-image: radial-gradient(ellipse at center, transparent 20%, black);
+  -webkit-mask-image: radial-gradient(
+    ellipse at center,
+    transparent 20%,
+    black
+  );
 }

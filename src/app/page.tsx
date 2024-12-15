@@ -4,21 +4,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { UpcomingEvents, cards } from "@/data";
-import { GradientText } from "@/components/ui/gradient-text";
+import { GradientText } from "@/app/components/gradient-text";
 
 export default function Home() {
   return (
     <div className="relative min-h-screen">
       <div className="absolute inset-0 -z-10">
-        <div
-          className="absolute inset-0 bg-black bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px]"
-          style={{
-            maskImage:
-              "radial-gradient(ellipse at center, transparent 20%, black)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse at center, transparent 20%, black)",
-          }}
-        />
+        <div className="mask absolute inset-0 bg-black bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px]" />
       </div>
 
       {/* Hero Section */}

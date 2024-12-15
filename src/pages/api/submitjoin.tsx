@@ -11,6 +11,10 @@ export default async function handler(
 ) {
   if (req.method === "POST") {
     const { name, email, grade, reason } = req.body;
+    if (!name) res.status(400).send("no name");
+    if (!email) res.status(400).send("no email");
+    if (!grade) res.status(400).send("no grade");
+    if (!reason) res.status(400).send("no reason");
 
     try {
       const { data, error } = await supabase

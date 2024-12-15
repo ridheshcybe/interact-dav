@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { UpcomingEvents as events } from "@/data";
+import { UpcomingEvents } from "@/data";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -15,7 +15,7 @@ export default function Events() {
         Upcoming Events
       </motion.h1>
       <div className="grid gap-6 md:grid-cols-2">
-        {events.map((event, i) => (
+        {UpcomingEvents.map((event, i) => (
           <motion.div
             key={i}
             className="bg-gray-800 p-6 rounded-lg shadow-lg"

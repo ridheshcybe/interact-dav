@@ -1,13 +1,10 @@
-import { useState, useEffect } from "react";
+import React from "react";
 
 export function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = React.useState(false);
 
-  useEffect(() => {
-    const checkIsMobile = () => {
-      setIsMobile(window.innerWidth < 1024); // Assuming 1024px as the breakpoint for mobile
-    };
-
+  React.useEffect(() => {
+    const checkIsMobile = () => setIsMobile(window.innerWidth < 1024); // Assuming 1024px as the breakpoint for mobile
     checkIsMobile();
     window.addEventListener("resize", checkIsMobile);
 
