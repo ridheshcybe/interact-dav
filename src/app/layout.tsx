@@ -1,4 +1,5 @@
 import "./globals.css";
+import Footer from "./components/footer";
 import { FloatingNav } from "@/app/components/floating-nav";
 
 export const metadata = {
@@ -11,6 +12,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const currentYear = new Date().getFullYear();
   return (
     <html lang="en">
       <head>
@@ -21,6 +23,7 @@ export default function RootLayout({
       <body className={`bg-black text-white min-h-screen`}>
         <FloatingNav />
         {children}
+        <Footer />
       </body>
     </html>
   );
