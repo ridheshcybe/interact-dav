@@ -1,72 +1,90 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
-import { navItems } from "@/data";
+import Link from "next/link";
+import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useIsMobile } from "@/hooks/useIsMobile";
-import { IoMdMenu, IoMdClose } from "react-icons/io";
-import { motion, AnimatePresence } from "framer-motion";
+import { navItems } from "@/data";
+import Image from "next/image";
 
-export function FloatingNav() {
+type NavLinkProps = {
+  href: string;
+  children: React.ReactNode;
+};
+
+function NavLink({ href, children }: NavLinkProps) {
   const pathname = usePathname();
-  const isMobile = useIsMobile();
-  const [isOpen, setIsOpen] = useState(false);
-
-  const NavLinks = () => (
-    <>
-      {navItems.map((item) => (
-        <Link
-          key={item.href}
-          href={item.href}
-          className={`px-4 py-2 rounded-full text-sm transition-colors ${
-            pathname === item.href
-              ? "bg-gradient-to-r from-teal-400 to-blue-400 text-white"
-              : "text-gray-300 hover:text-white"
-          }`}
-          onClick={() => setIsOpen(false)}
-        >
-          {item.label}
-        </Link>
-      ))}
-    </>
-  );
+  const isActive = pathname === href;
 
   return (
-    <motion.div
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      className="fixed top-4 z-50 w-full flex justify-end pr-4"
+    <Link
+      href={href}
+      className={`px-3 py-2 rounded-md text-sm font-medium ${
+        isActive
+          ? "bg-gray-900 text-white"
+          : "text-gray-300 hover:bg-gray-700 hover:text-white"
+      }`}
     >
-      {/* Burger Menu Icon */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="text-white lg:hidden"
-      >
-        {isOpen ? <IoMdClose size={30} /> : <IoMdMenu size={30} />}
-      </button>
+      {children}
+    </Link>
+  );
+}
 
-      {/* Desktop Navigation */}
-      {!isMobile && (
-        <div className="hidden lg:flex lg:items-center lg:gap-2 py-2 rounded-full bg-black/50 backdrop-blur-md border border-white/10">
-          <NavLinks />
+type NavLink = {
+  label: string;
+  href: string;
+};
+
+export function NavBar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const navLinks: NavLink[] = navItems;
+
+  return (
+    <nav className="bg-black rounded-lg shadow-lg">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex justify-center items-center">
+            <Image src="/logo-only.png" width={50} height={50} alt="logo" />
+            <Link href="/" className="text-white text-xl font-bold">
+              Interact
+            </Link>
+          </div>
+          <div className="hidden md:block">
+            <div className="ml-10 flex items-baseline space-x-4">
+              {navLinks.map((link) => (
+                <NavLink key={link.label} href={link.href}>
+                  {link.label}
+                </NavLink>
+              ))}
+            </div>
+          </div>
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+            >
+              <span className="sr-only">Open main menu</span>
+              {isOpen ? (
+                <X className="block h-6 w-6" aria-hidden="true" />
+              ) : (
+                <Menu className="block h-6 w-6" aria-hidden="true" />
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {isOpen && (
+        <div className="md:hidden">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            {navLinks.map((link) => (
+              <NavLink key={link.label} href={link.href}>
+                {link.label}
+              </NavLink>
+            ))}
+          </div>
         </div>
       )}
-
-      {/* Mobile Side Popup */}
-      <AnimatePresence>
-        {isMobile && isOpen && (
-          <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="fixed top-0 right-0 h-full w-64 bg-black/90 backdrop-blur-md border-l border-white/10 flex flex-col items-start p-4 pt-16"
-          >
-            <NavLinks />
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
+    </nav>
   );
 }

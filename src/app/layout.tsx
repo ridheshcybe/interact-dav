@@ -1,6 +1,6 @@
 import "./globals.css";
 import Footer from "./components/footer";
-import { FloatingNav } from "@/app/components/floating-nav";
+import { NavBar } from "@/app/components/floating-nav";
 
 export const metadata = {
   title: "Interact Club",
@@ -12,7 +12,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const currentYear = new Date().getFullYear();
   return (
     <html lang="en">
       <head>
@@ -21,8 +20,9 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
       </head>
       <body className={`bg-black text-white min-h-screen`}>
-        <FloatingNav />
+        <NavBar />
         {children}
+
         <Footer />
       </body>
     </html>

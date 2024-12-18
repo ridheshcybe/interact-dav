@@ -8,11 +8,8 @@ const upcomingEvents: Events[] = [];
 
 export const navItems = [
     { href: "/", label: "Home" },
-    { href: "/about", label: "About" },
     { href: "/events", label: "Events" },
-    { href: "/members", label: "Members" },
     { href: "/join", label: "Join" },
-    { href: "/contact", label: "Contact" },
     { href: "https://stats.uptimerobot.com/Z6V1J3233m", label: "Status" },
 ];
 

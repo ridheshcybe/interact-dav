@@ -27,7 +27,7 @@ export default function AboutSection() {
               <div className="flex items-center justify-end space-x-4 pt-6 border-t border-gray-700">
                 <div className="text-right">
                   <p className="font-semibold text-blue-400">Ridhesh w</p>
-                  <p className="text-sm text-gray-400">IT Head</p>
+                  <p className="text-sm text-gray-400">IT Officer</p>
                 </div>
                 <div>
                   <AnimatedSignature />

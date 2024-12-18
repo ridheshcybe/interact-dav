@@ -5,8 +5,38 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { UpcomingEvents, cards } from "@/data";
 import { GradientText } from "@/app/components/gradient-text";
+import Members from "./members/page";
+import Contact from "./contact/page";
+import dynamic from "next/dynamic";
+import { useState, useEffect, useRef } from "react";
+
+// Dynamically load the AboutSection component
+const AboutSection = dynamic(() => import("./about/page"), {
+  ssr: false, // Client-side only
+});
 
 export default function Home() {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect(); // Stop observing after component is visible
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of the component is visible
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="relative min-h-screen">
       <div className="absolute inset-0 -z-10">
@@ -105,6 +135,10 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <div ref={ref}>{isVisible && <AboutSection />}</div>
+      <Members />
+      <Contact />
 
       {/* Call to Action */}
       <section className="px-4 py-16">
